@@ -144,5 +144,9 @@ public class StorageFile {
     public String getPath() {
         return path.toString();
     }
+    
+    public boolean checkFileExists() {
+    	return path.toFile().exists();
+    }
 
 }

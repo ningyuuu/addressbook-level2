@@ -13,6 +13,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import java.io.FileNotFoundException;
+
 
 /**
  * Entry point of the Address Book application.
@@ -107,6 +109,9 @@ public class Main {
         try {
             command.setData(addressBook, lastShownList);
             CommandResult result = command.execute();
+            if (!storage.checkFileExists()) {
+            	throw new FileNotFoundException("File not found");
+            }
             storage.save(addressBook);
             return result;
         } catch (Exception e) {
