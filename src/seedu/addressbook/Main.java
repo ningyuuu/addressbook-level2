@@ -87,7 +87,7 @@ public class Main {
             ui.showResultToUser(result);
 
         } while (!ExitCommand.isExit(command));
-    }
+    }	
 
     /** Updates the {@link #lastShownList} if the result contains a list of Persons. */
     private void recordResult(CommandResult result) {

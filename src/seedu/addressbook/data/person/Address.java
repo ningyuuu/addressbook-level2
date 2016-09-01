@@ -11,9 +11,19 @@ public class Address {
     public static final String EXAMPLE = "123, some street";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
-
-    public final String value;
+    
+    private static final int ADDRESS_BLOCK_INDEX = 0;
+    private static final int ADDRESS_STREET_INDEX = 1;
+    private static final int ADDRESS_UNIT_INDEX = 2;
+    private static final int ADDRESS_POSTALCODE_INDEX = 3;
+    
+    //public final String value;
+    public final String block;
+    public final String street;
+    public final String unit;
+    public final String postalCode;
     private boolean isPrivate;
+    
 
     /**
      * Validates given address.
@@ -25,7 +35,12 @@ public class Address {
         if (!isValidAddress(address)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
-        this.value = address;
+        //this.value = address;
+        String[] addressArr = address.split(",");
+        this.block = addressArr[ADDRESS_BLOCK_INDEX];
+        this.street = addressArr[ADDRESS_STREET_INDEX];
+        this.unit = addressArr[ADDRESS_UNIT_INDEX];
+        this.postalCode = addressArr[ADDRESS_POSTALCODE_INDEX];
     }
 
     /**
@@ -37,6 +52,7 @@ public class Address {
 
     @Override
     public String toString() {
+        String value = this.block + "," + this.street + "," + this.unit + "," + this.postalCode;
         return value;
     }
 
@@ -44,12 +60,12 @@ public class Address {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
-                && this.value.equals(((Address) other).value)); // state check
+                && this.toString().equals(((Address) other).toString())); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return this.toString().hashCode();
     }
 
     public boolean isPrivate() {
