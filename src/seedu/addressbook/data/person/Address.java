@@ -18,10 +18,10 @@ public class Address {
     private static final int ADDRESS_POSTALCODE_INDEX = 3;
     
     //public final String value;
-    public final String block;
-    public final String street;
-    public final String unit;
-    public final String postalCode;
+    public final Block block;
+    public final Street street;
+    public final Unit unit;
+    public final PostalCode postalCode;
     private boolean isPrivate;
     
 
@@ -37,10 +37,10 @@ public class Address {
         }
         //this.value = address;
         String[] addressArr = address.split(",");
-        this.block = addressArr[ADDRESS_BLOCK_INDEX];
-        this.street = addressArr[ADDRESS_STREET_INDEX];
-        this.unit = addressArr[ADDRESS_UNIT_INDEX];
-        this.postalCode = addressArr[ADDRESS_POSTALCODE_INDEX];
+        this.block = new Block(addressArr[ADDRESS_BLOCK_INDEX]);
+        this.street = new Street(addressArr[ADDRESS_STREET_INDEX]);
+        this.unit = new Unit(addressArr[ADDRESS_UNIT_INDEX]);
+        this.postalCode = new PostalCode(addressArr[ADDRESS_POSTALCODE_INDEX]);
     }
 
     /**
@@ -52,7 +52,7 @@ public class Address {
 
     @Override
     public String toString() {
-        String value = this.block + "," + this.street + "," + this.unit + "," + this.postalCode;
+        String value = this.block.getValue() + "," + this.street.getValue() + "," + this.unit.getValue() + "," + this.postalCode.getValue();
         return value;
     }
 
