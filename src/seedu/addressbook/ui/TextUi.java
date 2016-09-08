@@ -4,6 +4,7 @@ import static seedu.addressbook.common.Messages.*;
 
 import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.common.Utils;
+import seedu.addressbook.data.person.Printable;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 
 import java.io.InputStream;
@@ -115,6 +116,14 @@ public class TextUi {
         for (String m : message) {
             out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
         }
+    }
+    
+    public String getPrintableString(Printable... printables) {
+    	String result = "";
+    	for (Printable printable: printables) {
+    		result = result + printable.getPrintableString();
+    	}
+    	return result;
     }
 
     /**
